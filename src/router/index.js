@@ -6,22 +6,22 @@
 
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from 'vue-router/auto-routes'
+// import { routes } from 'vue-router/auto-routes'
 
 //DOSYALARIM
 import Anasayfa from "@/pages/Anasayfa.vue";
 import GamePage from "@/pages/GamePage.vue";
 
-// const routes = [
-//   {
-//     path:"/",
-//     component: Anasayfa
-//   },
-//   {
-//     path:"/oyun",
-//     component: GamePage
-//   }
-// ]
+const routes = [
+  {
+    path:"/",
+    component: GamePage
+  },
+  // {
+  //   path:"/oyun",
+  //   component: GamePage
+  // }
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
