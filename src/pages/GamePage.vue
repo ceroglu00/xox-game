@@ -20,6 +20,8 @@
       </v-col>
     </v-row>
 
+    <p style="font-size: 5px">Şuanki Oyuncu: {{ moveCount % 2 == 0 ? '1' : '2' }}</p>
+
   </v-container>
 
 
@@ -31,15 +33,23 @@ import {ref} from "vue";
 
 var board = ref([])
 
-var moveCount = 0;
+var moveCount = ref(0);
 
 function checkCell(index) {
-  if (moveCount % 2 == 0) {
+  if (moveCount.value % 2 == 0) {
     board.value[index] = "X"
   } else {
     board.value[index] = "O"
   }
-  moveCount++;
+  moveCount.value++;
+}
+
+function DeterineWinner(){
+
+}
+
+function DeterineWinnerV2(){
+
 }
 
 </script>
@@ -47,5 +57,11 @@ function checkCell(index) {
 <style scoped>
 .cell {
   aspect-ratio: 1/1;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cell:hover {
+  background-color: red !important;
 }
 </style>
