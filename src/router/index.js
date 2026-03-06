@@ -15,7 +15,7 @@ import GamePage from "@/pages/GamePage.vue";
 const routes = [
   {
     path:"/",
-    component: GamePage
+    component: Anasayfa
   },
   // {
   //   path:"/oyun",

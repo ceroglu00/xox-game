@@ -1,10 +1,12 @@
 <template>
-  <v-container fluid class="pa-2">
+  <v-container class="pa-2" fluid>
     <v-row>
-      <v-col class="v-col-4 pa-0" v-for="(cell,index) in 9"
-
+      <v-col
+        v-for="(cell,index) in 9"
+        class="v-col-4 pa-0"
       >
-        <div class="
+        <div
+          class="
         d-flex
       bg-blue
       justify-center
@@ -12,7 +14,7 @@
       border-solid
       cell
 "
-             @click="checkCell(index)"
+          @click="checkCell(index)"
         >
           {{ board[index] }}
         </div>
@@ -29,28 +31,98 @@
 
 <script setup>
 
-import {ref} from "vue";
+  import {ref} from "vue";
 
-var board = ref([])
+  var board = ref([])
 
-var moveCount = ref(0);
+  var moveCount = ref(0);
 
-function checkCell(index) {
-  if (moveCount.value % 2 == 0) {
-    board.value[index] = "X"
-  } else {
-    board.value[index] = "O"
+  function checkCell(index) {
+    board.value[index] = moveCount.value % 2 == 0 ? "X" : "O";
+    moveCount.value++;
+
+    var winner = DeterineWinner(board.value);
+    if (winner == -1) {
+      alert("BERABERE")
+    } else if(winner){
+      alert("Kazanan " + winner)
+    }
   }
-  moveCount.value++;
-}
 
-function DeterineWinner(){
+  function DeterineWinner(boardToCheck) {
 
-}
+    var board = boardToCheck;
 
-function DeterineWinnerV2(){
+    const n = 3;
 
-}
+    for (let i = 0; i < n; i++) {
+      var satırbasi = i * n;
+      var sayac = 1;
+
+      for (let j = 1; j < n; j++) {
+
+        if (board[satırbasi] && board[satırbasi] == board[satırbasi + j]) {
+          sayac++
+        }
+      }
+      if (sayac == n) {
+        // alert(board[satırbasi] + "Kazandı")
+        return board[satırbasi]
+      }
+
+    }
+
+    for (let i = 0; i < n; i++) {
+      var sutunbasi = i;
+      var sayac = 1;
+
+      for (let j = 1; j < n; j++) {
+
+        if (board[sutunbasi] && board[sutunbasi] == board[sutunbasi + (j * n)]) {
+          sayac++
+        }
+      }
+      if (sayac == n) {
+        return board[sutunbasi]
+      }
+
+    }
+
+    for (let i = 0; i < n; i++) {
+      var caprazSol = 0;
+      var sayac = 1;
+
+      for (let j = 1; j < n; j++) {
+
+        if (board[caprazSol] && board[caprazSol] == board[caprazSol + (j * (n + 1))]) {
+          sayac++
+        }
+      }
+      if (sayac == n) {
+        return board[caprazSol]
+      }
+
+    }
+
+    for (let i = 0; i < n; i++) {
+      var caprazSag = (n - 1);
+      var sayac = 1;
+
+      for (let j = 1; j < n; j++) {
+
+        if (board[caprazSag] && board[caprazSag] == board[caprazSag + (j * (n - 1))]) {
+          sayac++
+        }
+      }
+      if (sayac == n) {
+        return board[caprazSag]
+      }
+    }
+    if (moveCount.value == 9) {
+      return -1
+    }
+  }
+
 
 </script>
 
